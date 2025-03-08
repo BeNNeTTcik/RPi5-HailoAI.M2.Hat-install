@@ -2,9 +2,9 @@
 It's installation Guid for Ubuntu Desktop LTS Server. AI Hat
 
 ### Documentation:
-- AI Hat - https://www.raspberrypi.com/documentation/accessories/ai-hat-plus.html
 - Raspberry Pi 5 -
-- Hailo 
+- AI Hat - https://www.raspberrypi.com/documentation/accessories/ai-hat-plus.html
+- Hailo Software - https://hailo.ai/developer-zone/documentation/
 - Hailo Software Versions - https://hailo.ai/developer-zone/documentation/hailo-sw-suite-2025-01/?page=suite%2Fversions_compatibility.html#id1
 
 ### Attention !!! 
