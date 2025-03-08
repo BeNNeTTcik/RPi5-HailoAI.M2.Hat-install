@@ -1,0 +1,1 @@
+# RPi5-HailoAI.M2.Hat-install
