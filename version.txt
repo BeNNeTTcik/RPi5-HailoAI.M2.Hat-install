@@ -1,0 +1,5 @@
+dataflow_compiler="3.27.0"
+hailort="4.17.0"
+integration_tools="1.17.0"
+model_zoo="2.11.0"
+tappas="3.28.0"

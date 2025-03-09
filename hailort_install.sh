@@ -1,13 +1,19 @@
 #!/bin/bash
-#define version
-source ./config.sh
+
+#read variables
+if [ -f version.txt ]; then
+    hailort=$(awk -F'=' '/^hailort=/{print $2}' version.txt)
+    echo "tappas: $hailort"
+else
+    echo "Sth wrong"
+fi
 
 #try to download the firmware
 function catch {
     echo "Failed to download from the primary URL. Trying the first alternative URL..."
-    wget http://alternative-url.com/path/to/hailort_${version}_arm64.deb || {
+    wget http://archive.raspberrypi.com/debian/pool/main/h/hailort/hailort_${hailort}_$(dpkg --print-architecture).deb || {
         echo "Failed to download from the first alternative URL. Trying the second alternative URL..."
-        wget http://alternative-url.com/path/to/hailort_${version}_arm64.deb || {
+        wget http://archive.raspberrypi.com/debian/pool/main/h/hailort/hailort_${hailort}-1_$(dpkg --print-architecture).deb || {
             echo "Failed to download from the second alternative URL. Exiting."
             exit 1
         }
@@ -19,8 +25,10 @@ function try {
     "$@" || catch
 }
 
-# Use the try function to execute commands
-try wget http://archive.raspberrypi.com/debian/pool/main/h/hailort/hailort_${version}_arm64.deb
+#main
+cd "$HOME/Downloads/RPi5-HailoAI.M2.Hat-install-main"
+try wget http://archive.raspberrypi.com/debian/pool/main/h/hailort/hailort_${hailort}_$(dpkg --print-architecture).deb
+sudo apt install ./hailort_${hailort}_$(dpkg --print-architecture).deb
 
 #check if hailort is installed
 if(hailortcli fw-control identify); then
