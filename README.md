@@ -16,3 +16,5 @@ I recommend creating an account on [The Hailo AI](https://hailo.ai) website, bec
 ### Install Drivers (Firmware + PCIe)
 I have prepared 3 scripts, the first one is for installing drivers for the firmware and for communication using PCIe.
 
+apt install git
+sudo chmod +x 

@@ -22,8 +22,8 @@ function before_reboot {
     sudo apt install build-essential -y
 
     #clone the firmware repository
-    echo "Cloning the firmware repository with version $hailort"
-    git clone https://github.com/hailo-ai/hailort-drivers.git --branch v${hailort}
+    echo "Cloning the firmware repository with version ${hailort}"
+    git clone https://github.com/hailo-ai/hailort-drivers.git --branch v${hailort//\"/}
     cd hailort-drivers/
 
     #install the firmware
@@ -34,41 +34,10 @@ function before_reboot {
     cd ../..
     ./download_firmware.sh
     sudo mkdir -p /lib/firmware/hailo
-    sudo mv hailo8_fw.${hailort}.bin /lib/firmware/hailo/hailo8_fw.bin
+    sudo mv hailo8_fw.${hailort//\"/}.bin /lib/firmware/hailo/hailo8_fw.bin
     sudo cp ./linux/pcie/51-hailo-udev.rules /etc/udev/rules.d/
-    cd "$HOME/Downloads/RPi5-HailoAI.M2.Hat-install-main"
-    
-    #systemd
-    sudo touch /etc/systemd/system/script.service
-    sudo tee -a /etc/systemd/system/script.service <<EOF
-[Unit]
-Description=Installation script
-
-[Service]
-Type=oneshot
-ExecStart=/bin/bash $HOME/Downloads/RPi5-HailoAI.M2.Hat-install-main
-
-[Install]
-WantedBy=multi-user.target
-EOF
-    sudo systemctl deamon-reload
-    sudo systemctl enable script.service
-    touch "$FLAG_FILE"
-}
-
-#after reboot
-function after_reboot {
-    echo "Continuation of installation"
-    sudo chmod +x test_after_drivers.sh
-    ./test_after_drivers.sh
-    sudo systemctl disable script.service
-}
-
-#before and after reboot
-if [ -f "$FLAG_FILE" ]; then
-    after_reboot
-    rm "$FLAG_FILE"
-else
-    before_reboot
+    cd "$HOME/RPi5-HailoAI.M2.Hat-install-main"
     sudo reboot
-fi
+    
+    
+

@@ -1,9 +1,10 @@
 #!/bin/bash
 
 declare -A compatibility
-compatibility["4.20.0"]="3.30.0 4.20.0 1.20.0 2.14.0 3.31.0"
-compatibility["4.19.0"]="3.29.0 4.19.0 1.19.0 2.13.0 3.30.0"
-compatibility["4.18.0"]="3.28.0 4.18.0 1.18.0 2.12.0 3.29.1"
+compatibility["4.20.0"]="3.30.0 4.20.0 1.20.0 2.14 3.31.0"
+compatibility["4.19.0"]="3.29.0 4.19.0 1.19.0 2.13 3.30.0"
+compatibility["4.18.0"]="3.28.0 4.18.0 1.18.0 2.12 3.29.1"
+compatibility["4.17.0"]="3.27.0 4.17.0 1.17.0 2.11 3.28.2"
 
 function show_hailort_versions {
     echo "HailoRT versions avaliable:"
@@ -23,9 +24,12 @@ function get_compatible_versions {
 }
 
 #Main
-#sudo chmod +x ./firmware_and_PCIe.sh
-#sudo chmod +x ./hailort_install.sh
-#sudo chmod +x ./TAPPAS_install.sh 
+sudo chmod +x ./firmware_and_PCIe.sh
+sudo chmod +x ./hailort_install.sh
+sudo chmod +x ./TAPPAS_install.sh
+sudo chmod +x ./test_after_drivers.sh
+sudo chmod +x ./model_zoo_install.sh 
+sudo chmod +x ./dataflow_install.sh
 echo "Choose HailoRT version:"
 show_hailort_versions
 read -p "Write HailoRT version that will be installed: " selected_hailort_version
