@@ -12,5 +12,5 @@ fi
 cd $HOME/RPi5-HailoAI.M2.Hat-install-main
 git clone https://github.com/hailo-ai/hailo_model_zoo.git --branch v${model_zoo//\"/}
 cd hailo_model_zoo
-cd pip install -e .
+cd pip install -e setup.py
 

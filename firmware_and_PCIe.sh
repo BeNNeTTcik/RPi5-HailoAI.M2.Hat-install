@@ -10,7 +10,6 @@ fi
 FLAG_FILE="/tmp/script_after_reboot.flag"
 
 #before reboot
-function before_reboot {
     #system update & upgrade
     echo "System Update & Upgrade"
     sudo apt update -y
