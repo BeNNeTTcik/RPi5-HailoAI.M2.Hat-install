@@ -10,6 +10,7 @@ fi
 FLAG_FILE="/tmp/script_after_reboot.flag"
 
 #before reboot
+
     #system update & upgrade
     echo "System Update & Upgrade"
     sudo apt update -y
@@ -34,8 +35,7 @@ FLAG_FILE="/tmp/script_after_reboot.flag"
     ./download_firmware.sh
     sudo mkdir -p /lib/firmware/hailo
     sudo mv hailo8_fw.${hailort//\"/}.bin /lib/firmware/hailo/hailo8_fw.bin
-    sudo cp ./linux/pcie/51-hailo-udev.rules /etc/udev/rules.d/
-    cd "$HOME/RPi5-HailoAI.M2.Hat-install-main"
+    sudo cp ./linux/pcie/51-hailo-udev.rules /etc/udev/rules.d
     sudo reboot
     
     

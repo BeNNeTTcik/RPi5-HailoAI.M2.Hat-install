@@ -7,7 +7,8 @@ if [ -f version.txt ]; then
 else
     echo "Sth wrong"
 fi
-
+############################ ERROR
+if 
 #python3.10 install
 sudo apt install software-properties-common -y
 sudo add-apt-repository ppa:deadsnakes/ppa

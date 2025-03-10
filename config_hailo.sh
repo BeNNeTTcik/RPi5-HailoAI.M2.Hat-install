@@ -18,10 +18,30 @@ function get_compatible_versions {
     if [[ -n "${compatibility[$hailort_version]}" ]]; then
         echo "${compatibility[$hailort_version]}"
     else
-        echo "No inforamtion about this version: ${hailort_version} check HailoAI website"
+        echo "No information about this version: ${hailort_version} check HailoAI website"
         exit 1
     fi
 }
+
+function ask_continue {
+    while true; do
+        echo "Next script is a firmware and PCIe installation."
+        read -r -p "Do you want to continue? (y/n)" answer
+        answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
+        
+        if [[ "$answer" == "y" ]]; then
+            echo "Continuing with the next script ..."
+            ./firmware_and_PCIe.sh
+            break
+        elif [[ "$answer" == "n" ]]; then
+            echo "Exiting script."
+            exit 0
+        else
+            echo "Invalid input. Please enter 'y' or 'n'."
+        fi
+    done
+}
+
 
 #Main
 sudo chmod +x ./firmware_and_PCIe.sh
@@ -30,6 +50,7 @@ sudo chmod +x ./TAPPAS_install.sh
 sudo chmod +x ./test_after_drivers.sh
 sudo chmod +x ./model_zoo_install.sh 
 sudo chmod +x ./dataflow_install.sh
+sudo chmod +x ./example_install.sh
 echo "Choose HailoRT version:"
 show_hailort_versions
 read -p "Write HailoRT version that will be installed: " selected_hailort_version
@@ -55,3 +76,5 @@ integration_tools="$integration_tools"
 model_zoo="$model_zoo"
 tappas="$tappas"
 EOF
+
+ask_continue
